@@ -1,0 +1,13 @@
+**/.profile
+**/.bashrc
+**/.cache
+**/.workloads
+**/.config
+.ideas
+.local
+
+**/__pycache__
+**/.ipynb_checkpoints
+**/.ipython
+**/.jupyter
+**/.python_history
