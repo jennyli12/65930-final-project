@@ -1,0 +1,24 @@
+mapping:
+  # Tensor Parallel Mapping:
+  # - We partition the model weights among PEs along the output dimension,
+  #   so that each PE only stores a fraction (M_split) of the weights.
+  # - The local buffer mapping is still temporal.
+  # - SystemMemory must be re-accessed to supply the necessary weight fragments.
+  
+  # Temporal mapping on the LocalBuffer:
+  - target: LocalBuffer
+    type: temporal
+    factors: [R, P]
+    permutation: [R, P]
+
+  # Spatial mapping on the MACs:
+  # Partitioning across PEs.
+  - target: MAC
+    type: spatial
+    factors: [M_split]
+
+  # Mapping for SystemMemory:
+  # For tensor-parallel inference, weights must be fetched from SystemMemory.
+  - target: SystemMemory
+    type: temporal
+    factors: [M]
