@@ -1,0 +1,131 @@
+dumped_by_timeloop_front_end: true
+architecture:
+    version: '0.4'
+    subtree:
+      - name: top_level
+        attributes:
+            global_cycle_seconds: 1e-9
+            technology: "45nm"
+            version: '0.4'
+        local:
+          - name: MainMemory[1..1]
+            class: DRAM
+            attributes:
+                width: 256
+                block_size: 32
+                word_bits: 8
+                datawidth: 8
+                has_power_gating: false
+                n_banks: 2
+                cluster_size: 1
+                reduction_supported: true
+                multiple_buffering: 1
+                min_utilization: 0
+                allow_overbooking: false
+                meshX: 1
+                meshY: 1
+                power_gated_at: "MainMemory"
+            required_actions:
+              - 'read'
+              - 'write'
+            enabled: true
+          - name: GlobalBuffer[1..1]
+            class: SRAM
+            attributes:
+                depth: 8192
+                width: 256
+                block_size: 32
+                word_bits: 8
+                datawidth: 8
+                n_rdwr_ports: 2
+                n_rd_ports: 0
+                n_wr_ports: 0
+                has_power_gating: false
+                n_banks: 2
+                cluster_size: 1
+                reduction_supported: true
+                multiple_buffering: 1
+                min_utilization: 0
+                allow_overbooking: false
+                meshX: 1
+                meshY: 1
+                power_gated_at: "GlobalBuffer"
+            required_actions:
+              - 'read'
+              - 'write'
+            enabled: true
+          - name: MACC[1..1]
+            class: intmac
+            attributes:
+                datawidth: 8
+                width: 8
+                cycle_time: 1e-9
+                has_power_gating: false
+                meshX: 1
+                meshY: 1
+                power_gated_at: "MACC"
+            required_actions:
+              - 'compute'
+            enabled: true
+architecture_constraints:
+    targets: []
+problem:
+  - shape:
+        name: Fc1
+        dimensions:
+          - P1
+          - M1
+          - C1
+        data_spaces:
+          - name: Fmap1
+            dimensions:
+              - Fmap1_C
+              - Fmap1_P
+            projection: '[ C1, P1 ]'
+          - name: Filter1
+            dimensions:
+              - Filter1_C
+              - Filter1_M
+            projection: '[ C1, M1 ]'
+          - name: Fmap2
+            dimensions:
+              - Fmap2_C
+              - Fmap2_P
+            projection: '[ M1, P1 ]'
+            read_write: true
+    instance: >-
+        0 <= P1 < 128 and 0 <= M1 < 64 and 0 <= C1 < 64
+  - shape:
+        name: Fc2
+        dimensions:
+          - P2
+          - M2
+          - C2
+        data_spaces:
+          - name: Fmap2
+            dimensions:
+              - Fmap2_C
+              - Fmap2_P
+            projection: '[ C2, P2 ]'
+          - name: Filter2
+            dimensions:
+              - Filter2_C
+              - Filter2_M
+            projection: '[ C2, M2 ]'
+          - name: Fmap3
+            dimensions:
+              - Fmap3_C
+              - Fmap3_P
+            projection: '[ M2, P2 ]'
+            read_write: true
+    instance: >-
+        0 <= P2 < 128 and 0 <= M2 < 64 and 0 <= C2 < 64
+compound_components:
+    version: '0.4'
+    classes: []
+mapping: []
+globals:
+    version: '0.4'
+    environment_variables: {}
+    expression_custom_functions: []
+    accelergy_plug_ins: []

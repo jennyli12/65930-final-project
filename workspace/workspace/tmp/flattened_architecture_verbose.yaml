@@ -1,0 +1,32 @@
+architecture:
+    version: '0.4'
+    local:
+      - name: top_level.MainMemory[1..1]
+        class: DRAM
+        actions:
+          - name: 'read'
+            arguments:
+                global_cycle_seconds: 1e-09
+                action_latency_cycles: 1
+          - name: 'write'
+            arguments:
+                global_cycle_seconds: 1e-09
+                action_latency_cycles: 1
+      - name: top_level.GlobalBuffer[1..1]
+        class: SRAM
+        actions:
+          - name: 'read'
+            arguments:
+                global_cycle_seconds: 1e-09
+                action_latency_cycles: 1
+          - name: 'write'
+            arguments:
+                global_cycle_seconds: 1e-09
+                action_latency_cycles: 1
+      - name: top_level.MACC[1..1]
+        class: intmac
+        actions:
+          - name: 'compute'
+            arguments:
+                global_cycle_seconds: 1e-09
+                action_latency_cycles: 1
