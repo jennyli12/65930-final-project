@@ -34,9 +34,9 @@ architecture:
       width: 64
       datawidth: datawidth
 
-  - !Container
-    name: MACArray
-    spatial: {meshX: 8}
+  # - !Container
+  #   name: MACArray
+  #   spatial: {meshX: 8}
 
   - !Component
     name: MAC

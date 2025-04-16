@@ -1,18 +1,48 @@
 mapping:
-  # Data Parallel Mapping:
-  # - Model weights are fully replicated in each PE.
-  # - The workload is partitioned across PEs along the batch dimension (N).
-  # - LocalBuffer reuses input activations temporally within each PE.
-  
-  # Temporal mapping on the LocalBuffer:
+  - target: SystemMemory
+    type: temporal
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=4
+    - M=1
+    - C=1
+    permutation: [S, R, Q, P, C, M, N]
+
+  - target: PE
+    type: spatial
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=16
+    - M=1
+    - C=1
+    permutation: [N, S, R, Q, P, C, M]
+
+  - target: LocalMemory
+    type: temporal
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=1
+    - M=192
+    - C=64
+    permutation: [S, R, Q, P, C, M, N]
+
   - target: LocalBuffer
     type: temporal
-    factors: [R, P]
-    permutation: [R, P]
-
-  # Spatial mapping on the MACs:
-  - target: MAC
-    type: spatial
-    factors: [N]
-  
-
+    factors: 
+    - P=27
+    - Q=27
+    - R=5
+    - S=5
+    - N=1
+    - M=1
+    - C=1
+    permutation: [S, R, Q, P, C, M, N]
