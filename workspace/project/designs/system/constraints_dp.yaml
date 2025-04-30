@@ -7,7 +7,7 @@ constraints:
     bypass: []
   - target: SystemMemory
     type: temporal
-    factors: [P=1, Q=1, R=1, S=1, N=0, M=1, C=1]
+    factors: [P=1, Q=1, R=1, S=1, M=1, C=1]
     permutation: [S, R, Q, P, C, M, N]
     
   - target: GPU

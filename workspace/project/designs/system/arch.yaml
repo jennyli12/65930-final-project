@@ -28,7 +28,7 @@ architecture:
 
   - !Component
     name: LocalBuffer
-    class: SRAM
+    class: SRAM  # TPU has 72 MB
     attributes:
       width: 128
       depth: 2048
@@ -38,13 +38,13 @@ architecture:
 
   - !Container
     name: PE
-    spatial: {meshX: 4, meshY: 4}
+    spatial: {meshX: 4, meshY: 4}  # TPU has 128x128 or 256x256 
 
   - !Component
     name: RegisterFile
     class: regfile
     attributes:
-      depth: 128
+      depth: 32
       width: 16
       datawidth: datawidth
 
