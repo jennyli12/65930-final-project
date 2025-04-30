@@ -17,7 +17,7 @@ architecture:
 
   - !Container
     name: GPU
-    spatial: {meshX: 16}
+    spatial: {meshX: {{gpu_meshX}}}
 
   - !Component
     name: LocalMemory
@@ -39,31 +39,6 @@ architecture:
   - !Container
     name: PE
     spatial: {meshX: 4, meshY: 4}
-
-  # - !Component
-  #   name: scratchpad
-  #   class: smart_storage
-  #   attributes: {depth: 128, width: 16, datawidth: datawidth}
-
-  # - !Component
-  #   name: weight_reg
-  #   class: reg_storage
-  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
-      
-  # - !Component
-  #   name: input_activation_reg
-  #   class: reg_storage
-  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
-
-  # - !Component
-  #   name: output_activation_reg
-  #   class: reg_storage
-  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
-
-  # - !Component
-  #   name: mac
-  #   class: mac_compute
-  #   attributes: {num_pipline_stages: 2, datawidth: datawidth}
 
   - !Component
     name: RegisterFile

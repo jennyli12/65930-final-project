@@ -18,7 +18,7 @@ constraints:
     - R=1
     - S=1
     - N=1
-    - M=16
+    - M={{gpu_meshX}}
     - C=1
     permutation: [M, S, R, Q, P, C, N]
     
