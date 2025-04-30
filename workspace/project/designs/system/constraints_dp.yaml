@@ -1,0 +1,63 @@
+constraints:
+  version: 0.4
+  targets:
+  - target: SystemMemory
+    type: dataspace
+    keep: [Inputs, Outputs, Weights]
+    bypass: []
+  - target: SystemMemory
+    type: temporal
+    factors: [P=1, Q=1, R=1, S=1, N=4, M=1, C=1]
+    permutation: [S, R, Q, P, C, M, N]
+    
+  - target: GPU
+    type: spatial
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=16
+    - M=1
+    - C=1
+    permutation: [N, S, R, Q, P, C, M]
+    
+  - target: LocalMemory
+    type: dataspace
+    keep: [Inputs, Outputs, Weights]
+    bypass: []
+  - target: LocalMemory
+    type: temporal
+    factors: [P=1, Q=1, R=1, S=1]
+    permutation: [S, R, Q, P, C, M, N]
+
+  - target: LocalBuffer
+    type: dataspace
+    keep: [Inputs, Outputs, Weights]
+    bypass: []
+  - target: LocalBuffer
+    type: temporal
+    factors: [P=1, Q=1, R=1, S=1]
+    permutation: [S, R, Q, P, C, M, N]
+
+  - target: PE
+    type: spatial
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=1
+    - C<=4
+    - M<=4
+    permutation: [C, M, S, R, Q, P, N]
+    split: 1
+
+  - target: RegisterFile
+    type: dataspace
+    keep: [Weights]
+    bypass: [Inputs, Outputs]
+  - target: RegisterFile
+    type: temporal
+    factors: [P=0, Q=0, R=0, S=0]
+    permutation: [Q, P, C, M, N, S, R]

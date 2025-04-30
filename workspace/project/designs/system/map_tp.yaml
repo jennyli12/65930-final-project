@@ -11,7 +11,7 @@ mapping:
     - C=1
     permutation: [S, R, Q, P, C, M, N]
 
-  - target: PE
+  - target: GPU
     type: spatial
     factors: 
     - P=1
@@ -31,19 +31,49 @@ mapping:
     - R=1
     - S=1
     - N=64
-    - M=12
-    - C=64
+    - M=3
+    - C=16
     permutation: [S, R, Q, P, C, M, N]
 
   - target: LocalBuffer
     type: temporal
     factors: 
-    - P=27
-    - Q=27
-    - R=5
-    - S=5
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
     - N=1
     - M=1
     - C=1
     permutation: [S, R, Q, P, C, M, N]
+
+  - target: PE
+    type: spatial
+    factors: 
+    - P=1
+    - Q=1
+    - R=1
+    - S=1
+    - N=1
+    - M=4
+    - C=4
+    permutation: [C, M, S, R, Q, P, N]
+    split: 1
+
+  - target: RegisterFile
+    type: temporal
+    factors: 
+    - P=0
+    - Q=0
+    - R=0
+    - S=0
+    - N=1
+    - M=1
+    - C=1
+    permutation: [Q, P, C, M, N, S, R]
+
+  - target: RegisterFile
+    type: dataspace
+    keep: [Weights]
+    bypass: [Inputs, Outputs]
     

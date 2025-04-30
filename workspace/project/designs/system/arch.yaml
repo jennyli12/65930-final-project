@@ -1,0 +1,81 @@
+architecture:
+  version: 0.4
+  nodes:
+  - !Container
+    name: System
+    attributes:
+      technology: "45nm"
+      global_cycle_seconds: 1e-9
+      datawidth: 16
+
+  - !Component
+    name: SystemMemory
+    class: DRAM
+    attributes:
+      width: 64
+      datawidth: datawidth
+
+  - !Container
+    name: GPU
+    spatial: {meshX: 16}
+
+  - !Component
+    name: LocalMemory
+    class: DRAM
+    attributes:
+      width: 64
+      datawidth: datawidth
+
+  - !Component
+    name: LocalBuffer
+    class: SRAM
+    attributes:
+      width: 128
+      depth: 2048
+      datawidth: datawidth
+      n_banks: 1
+      n_rdwr_ports: 2
+
+  - !Container
+    name: PE
+    spatial: {meshX: 4, meshY: 4}
+
+  # - !Component
+  #   name: scratchpad
+  #   class: smart_storage
+  #   attributes: {depth: 128, width: 16, datawidth: datawidth}
+
+  # - !Component
+  #   name: weight_reg
+  #   class: reg_storage
+  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
+      
+  # - !Component
+  #   name: input_activation_reg
+  #   class: reg_storage
+  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
+
+  # - !Component
+  #   name: output_activation_reg
+  #   class: reg_storage
+  #   attributes: {depth: 1, width: 16, datawidth: datawidth}
+
+  # - !Component
+  #   name: mac
+  #   class: mac_compute
+  #   attributes: {num_pipline_stages: 2, datawidth: datawidth}
+
+  - !Component
+    name: RegisterFile
+    class: regfile
+    attributes:
+      depth: 128
+      width: 16
+      datawidth: datawidth
+
+  - !Component
+    name: MAC
+    class: intmac
+    attributes:
+      width: 16
+      datawidth: datawidth
