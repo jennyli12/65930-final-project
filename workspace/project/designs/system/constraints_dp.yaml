@@ -48,8 +48,8 @@ constraints:
     - R=1
     - S=1
     - N=1
-    - C<=4
-    - M<=4
+    - C<={{pe_meshX}}
+    - M<={{pe_meshY}}
     permutation: [C, M, S, R, Q, P, N]
     split: 1
 

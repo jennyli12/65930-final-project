@@ -12,7 +12,7 @@ architecture:
     name: SystemMemory
     class: DRAM
     attributes:
-      width: 64
+      width: 4096
       datawidth: datawidth
 
   - !Container
@@ -38,7 +38,7 @@ architecture:
 
   - !Container
     name: PE
-    spatial: {meshX: 4, meshY: 4}
+    spatial: {meshX: {{pe_meshX}}, meshY: {{pe_meshY}}}
 
   - !Component
     name: RegisterFile
