@@ -12,4 +12,5 @@
 **/.jupyter
 **/.python_history
 
-**/output_dir
+**/cache
+**/outputs
