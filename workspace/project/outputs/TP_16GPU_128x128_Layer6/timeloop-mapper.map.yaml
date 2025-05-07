@@ -1,0 +1,82 @@
+mapping:
+  - target: RegisterFile
+    type: datatype
+    keep:
+      - Weights
+    bypass:
+      - Inputs
+      - Outputs
+  - target: inter_PE_spatial
+    type: datatype
+    keep:
+      []
+    bypass:
+      - Weights
+      - Inputs
+      - Outputs
+  - target: LocalBuffer
+    type: datatype
+    keep:
+      - Weights
+      - Inputs
+      - Outputs
+    bypass:
+      []
+  - target: LocalMemory
+    type: datatype
+    keep:
+      - Weights
+      - Inputs
+      - Outputs
+    bypass:
+      []
+  - target: inter_GPU_spatial
+    type: datatype
+    keep:
+      []
+    bypass:
+      - Weights
+      - Inputs
+      - Outputs
+  - target: SystemMemory
+    type: datatype
+    keep:
+      - Weights
+      - Inputs
+      - Outputs
+    bypass:
+      []
+  - target: RegisterFile
+    type: temporal
+    factors: C1 M1 R1 S1 N4 P1 Q1
+    permutation: NCMRSPQ
+  - target: inter_PE_spatial
+    type: spatial
+    factors: C128 M64 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
+    split: 1
+  - target: inter_PE_spatial
+    type: temporal
+    factors: C1 M1 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
+  - target: LocalBuffer
+    type: temporal
+    factors: C1 M1 R1 S1 N4 P1 Q1
+    permutation: NCMRSPQ
+  - target: LocalMemory
+    type: temporal
+    factors: C32 M4 R1 S1 N2 P1 Q1
+    permutation: CMNRSPQ
+  - target: inter_GPU_spatial
+    type: spatial
+    factors: C1 M16 R1 S1 N1 P1 Q1
+    permutation: MCRSNPQ
+    split: 1
+  - target: inter_GPU_spatial
+    type: temporal
+    factors: C1 M1 R1 S1 N1 P1 Q1
+    permutation: CMRSNPQ
+  - target: SystemMemory
+    type: temporal
+    factors: C1 M1 R1 S1 N2 P1 Q1
+    permutation: NCMRSPQ

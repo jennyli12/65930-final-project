@@ -1,0 +1,15 @@
+ART:
+    version: '0.4'
+    tables:
+      - name: System_top_level.SystemMemory[1..1]
+        area: 0.0
+      - name: System_top_level.LocalMemory[1..1]
+        area: 0.0
+      - name: System_top_level.LocalBuffer[1..1]
+        area: 97538.7
+      - name: System_top_level.inter_PE_spatial[1..1]
+        area: 1.0
+      - name: System_top_level.RegisterFile[1..256]
+        area: 1965.98
+      - name: System_top_level.MAC[1..256]
+        area: 1726.5

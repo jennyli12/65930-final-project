@@ -1,0 +1,18 @@
+SystemMemory [ Weights:16777216 (16777216) Inputs:262144 (262144) Outputs:262144 (262144) ] 
+LocalMemory [ Weights:16777216 (16777216) Inputs:262144 (262144) Outputs:262144 (262144) ] 
+------------------------------------------------------------------------------------------
+| for M in [0:64)
+|   for C in [0:128)
+
+LocalBuffer [ Weights:2048 (2048) Inputs:2048 (2048) Outputs:4096 (4096) ] 
+inter_PE_spatial [ ] 
+--------------------
+|     for M in [0:16) (Spatial-Y)
+|       for C in [0:16) (Spatial-X)
+
+RegisterFile [ Weights:8 (8) ] 
+------------------------------
+|         for N in [0:64)
+|           for M in [0:4)
+|             for C in [0:2)
+|               << Compute >>

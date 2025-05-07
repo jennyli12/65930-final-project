@@ -1,0 +1,25 @@
+SystemMemory [ Weights:37748736 (37748736) Inputs:589824 (589824) Outputs:262144 (262144) ] 
+inter_GPU_spatial [ ] 
+---------------------
+| for M in [0:128) (Spatial-X)
+
+LocalMemory [ Weights:294912 (294912) Inputs:589824 (589824) Outputs:2048 (2048) ] 
+----------------------------------------------------------------------------------
+|   for N in [0:2)
+|     for C in [0:96)
+
+LocalBuffer [ Weights:3072 (3072) Inputs:3072 (3072) Outputs:1024 (1024) ] 
+--------------------------------------------------------------------------
+|       for N in [0:4)
+
+inter_PE_spatial [ ] 
+--------------------
+|         for M in [0:16) (Spatial-Y)
+|           for C in [0:16) (Spatial-X)
+
+RegisterFile [ Weights:12 (12) ] 
+--------------------------------
+|             for N in [0:8)
+|               for M in [0:2)
+|                 for C in [0:6)
+|                   << Compute >>
